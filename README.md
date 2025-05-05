@@ -48,3 +48,9 @@ All components are containerized and orchestrated using Docker Compose.
     ```
    docker compose up
     ```
+
+3. **Start specific container**
+- Kafka server
+    ```
+   docker run -p 9092:9092 apache/kafka-native:4.0.0
+    ```
