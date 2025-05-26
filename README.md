@@ -52,5 +52,27 @@ All components are containerized and orchestrated using Docker Compose.
 3. **Start specific container**
 - Kafka server
     ```
-   docker run -p 9092:9092 apache/kafka-native:4.0.0
+   docker run --name kafka-test -p 9092:9092 apache/kafka-native:4.0.0
+    ```
+4. **Ruby project**
+- Install dependencies
+    ```
+    bundle install
+    ```
+- Karafka server - listening consumers
+    ```
+   bundle exec karafka server
+    ```
+5. **CLI commands to kafka (with example topic)**
+- Create example topic to server
+    ```
+    kafka-topics.sh --create --topic example --bootstrap-server localhost:9092
+    ```
+- Send messages to topic using producer sh
+    ```
+    kafka-console-producer.sh --topic example --bootstrap-server localhost:9092
+    ```
+    only using data as json
+    ```json
+    {"event": "signup", "user_id": 123}
     ```
