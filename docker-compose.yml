@@ -1,0 +1,30 @@
+version: 3.8
+
+services:
+	kafka:
+		build:
+			context: .
+		container_name: kafka_server
+		ports:
+			- "9092:9092"
+		environment:
+			KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka:9093"
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+			KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+			
+	ruby_pdf:
+		build:
+			context: ./ruby-ruby_pdf
+		container_name: ruby_pdf
+		depends_on:
+			- kafka
+		environment: 
+			KAFKA_BROKERS: kafka:9092
+			volumes:
+				- ./your-karafka-project:/app
+			working_dir: /app
+			command: bundle exec karafka server
