@@ -11,4 +11,4 @@ WORKDIR /opt/kafka
 EXPOSE 9092
 
 # Optional: change or add default command (not required if using as-is)
-# CMD ["start-kafka.sh"]
+CMD ["start-kafka.sh"]

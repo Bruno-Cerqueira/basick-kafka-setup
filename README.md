@@ -76,3 +76,12 @@ All components are containerized and orchestrated using Docker Compose.
     ```json
     {"event": "signup", "user_id": 123}
     ```
+
+
+
+# Temporal information
+
+- It is only working with: 
+    kafka docker running with -> docker run --name kafka-test-1 -p 9092:9092 my-kafka
+    Execute topic kafka-console-producer.sh --bootstrap-server localhost:9092 --topic example
+    Up karafka -> bundle exec karafka server

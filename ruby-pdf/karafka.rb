@@ -15,15 +15,17 @@ APP_LOADER.enable_reloading
 %w[
   lib
   app/consumers
-].each { |dir| APP_LOADER.push_dir(dir) }
+].each { |dir|   APP_LOADER.push_dir(File.expand_path("../#{dir}", __FILE__)) }
 
 APP_LOADER.setup
 APP_LOADER.eager_load
 
 class KarafkaApp < Karafka::App
   setup do |config|
-    config.kafka = { 'bootstrap.servers': '127.0.0.1:9092' }
+    config.kafka = { 'bootstrap.servers': 'localhost:9092' }
     config.client_id = 'example_app'
+    config.logger = Logger.new($stdout)
+    config.logger.level = Logger::DEBUG
   end
 
   # Comment out this part if you are not using instrumentation and/or you are not
