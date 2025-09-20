@@ -22,7 +22,7 @@ APP_LOADER.eager_load
 
 class KarafkaApp < Karafka::App
   setup do |config|
-    config.kafka = { 'bootstrap.servers': 'localhost:9092' }
+    config.kafka = { 'bootstrap.servers': ENV["KAFKA_ADVERTISED_LISTENER"] }
     config.client_id = 'example_app'
     config.logger = Logger.new($stdout)
     config.logger.level = Logger::DEBUG
